@@ -33,13 +33,14 @@ Run the following command to run the script:
 python src/get_emergency_fund.py
 ```
 
-Initially, the script will ask you to select an account to "source" your emergency fund balance. It will also ask you to input your monthly expenses. The script outputs your currently monthly Mint budget to help aid you in determining your monthly expenses.
+The script will first log you into Mint. Mintapi tends to fail, when logging in frequently, so if the API is unable to log you in, wait a few minutes and try again.
+
+The script will then ask you to select an account to "source" your emergency fund balance. It will also ask you to input your monthly expenses. The script outputs your currently monthly Mint budget to help aid you in determining your monthly expenses.
 
 Once the script runs once, it'll save your account and expense info in a JSON file for later usage. If you want to change your account/expenses, delete or alter the JSON file.
 
 ## Future Fixes and Additions
 
-* Mintapi will occasionally fail on login. While I currently try running the script over and over again, it'd be nice to automatically retry 3-4 times.
 * Support for multiple "source" accounts.
 * Support for changing account/expense info from the command line
 * Initiating an account refresh
