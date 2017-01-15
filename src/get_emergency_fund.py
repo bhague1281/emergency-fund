@@ -35,7 +35,6 @@ def write_user_data(accounts, budget):
     then write that user data to a JSON file. Return the user data that was written
     """
 
-    print('Your current expense budget (from Mint): {0}\n\n'.format(int(get_expenses(budget))))
     print('Your Accounts\n------------------------\n\n')
 
     for idx, account in enumerate(accounts):
@@ -48,6 +47,8 @@ def write_user_data(accounts, budget):
         print('{idx}: {name} ({display_name}) {currentBalance}'.format_map(account_values))
 
     account_idx = input('\n\nSelect an account (by number): ')
+
+    print('\nYour current expense budget (from Mint): {0}\n\n'.format(int(get_expenses(budget))))
     monthly_expenses = input('\nInput your monthly expenses: ')
     account_idx = int(account_idx)
     monthly_expenses = float(monthly_expenses)
