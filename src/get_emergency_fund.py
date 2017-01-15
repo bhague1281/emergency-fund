@@ -25,8 +25,7 @@ def get_user_data():
                 return json.load(data)
         except:
             return None
-    else:
-        return None
+    return None
 
 
 def write_user_data(accounts, budget):
@@ -46,15 +45,15 @@ def write_user_data(accounts, budget):
         }
         print('{idx}: {name} ({display_name}) {currentBalance}'.format_map(account_values))
 
-    account_idx = input('\n\nSelect an account (by number): ')
+    account_indicies = input('\n\nSelect an account by number. Use commas for multiple accounts (e.g. 1, 9): ')
 
     print('\nYour current expense budget (from Mint): {0}\n\n'.format(int(get_expenses(budget))))
     monthly_expenses = input('\nInput your monthly expenses: ')
-    account_idx = int(account_idx)
+    account_indicies = map(lambda x: int(x), account_indicies.split(','))
     monthly_expenses = float(monthly_expenses)
 
     user_data = {
-        'account_id': accounts[account_idx]['accountId'],
+        'account_ids': [accounts[idx]['accountId'] for idx in account_indicies],
         'monthly_expenses': monthly_expenses
     }
 
@@ -71,21 +70,21 @@ def get_expenses(budget):
 
 def valid_user_data(user_data):
     """Return if the dictionary has the required data to calculate runway"""
-    return 'account_id' in user_data and 'monthly_expenses' in user_data
+    return 'account_ids' in user_data and 'monthly_expenses' in user_data
 
 
-def emergency_fund_runway(accounts, account_id, monthly_expenses):
+def emergency_fund_runway(accounts, account_ids, monthly_expenses):
     """
     Calculate the "runway", or number of months that the emergency fund
     will last with the given expenses. Return a message to print to the user
     """
 
-    account = [a for a in accounts if a['accountId'] == account_id]
-    if len(account) == 1:
-        runway_amount = int(account[0]['currentBalance'] / monthly_expenses)
+    emergency_account_balances = [a['currentBalance'] for a in accounts if a['accountId'] in account_ids]
+    if len(emergency_account_balances) > 0:
+        runway_amount = int(sum(emergency_account_balances) / monthly_expenses)
         return 'Your emergency fund has a runway of {0} months.'.format(runway_amount)
     else:
-        return 'That account cannot be found'
+        return 'Account cannot be found'
 
 
 def main():
@@ -115,4 +114,6 @@ def main():
 
     print(emergency_fund_runway(accounts, **user_data))
 
-main()
+
+if __name__ == '__main__':
+    main()
