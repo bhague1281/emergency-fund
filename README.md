@@ -44,3 +44,4 @@ Once the script runs once, it'll save your account and expense info in a JSON fi
 * Support for multiple "source" accounts.
 * Support for changing account/expense info from the command line
 * Initiating an account refresh
+* Docker support
