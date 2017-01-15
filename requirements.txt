@@ -1,0 +1,4 @@
+mintapi==1.22
+requests==2.12.4
+selenium==3.0.2
+xmltodict==0.10.2
