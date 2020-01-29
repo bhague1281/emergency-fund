@@ -7,13 +7,13 @@ Uses [mintapi](https://github.com/mrooney/mintapi), a screen-scraping API for Mi
 1.) Ensure you have Python 3 and run the following to install dependencies:
 
 ```bash
-pip install -r requirements.txt
+pip install -r requirements.txt # or pip3
 ```
 
 2.) Install `chromedriver`, which will allow mintapi to find your Mint session cookies.
 
 ```
-brew install chromedriver # or sudo apt-get install chromium-chromedriver on Ubuntu/Debian
+brew cask install chromedriver # or sudo apt-get install chromium-chromedriver on Ubuntu/Debian
 ```
 
 3.) Set your Mint email and password as environment variables in a file called `.env`.
